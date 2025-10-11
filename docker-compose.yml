@@ -9,6 +9,6 @@ services:
     build: ./book/
   borrow:
     build: ./borrow/
-  fronnend:
+  frontend:
     build: .
 ...
