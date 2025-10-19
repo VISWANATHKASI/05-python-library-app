@@ -15,7 +15,7 @@ services:
       - db_volume:/docker-entrypoint-initdb.d/:ro
 
   auth:
-    container_name: auth
+    container_name: auth_service
     build: ./auth/
     ports:
       - "5001:5001"
@@ -29,7 +29,7 @@ services:
       - auth_volume:/app:ro
        
   book:
-    container_name: book
+    container_name: book_service
     build: ./book/
     ports:
       - "5002:5002"
@@ -43,7 +43,7 @@ services:
       - book_volume:/app:ro
 
   borrow:
-    container_name: borrow
+    container_name: borrow_service
     build: ./borrow/
     ports:
       - "5003:5003"
