@@ -18,7 +18,7 @@ services:
     ports:
       - "5001:5001"
     deploy:
-      replicas: 4
+      replicas: 1
     networks:
       - service
       - db_network
@@ -31,7 +31,7 @@ services:
     ports:
       - "5002:5002"
     deploy:
-      replicas: 4
+      replicas: 1
     networks:
       - service
       - db_network
@@ -44,7 +44,7 @@ services:
     ports:
       - "5003:5003"
     deploy:
-      replicas: 4
+      replicas: 1
     networks:
       - service
       - db_network
@@ -57,7 +57,7 @@ services:
     ports:
       - "5000:5000"
     deploy:
-      replicas: 4
+      replicas: 1
     networks:
       - frontend
       - service
