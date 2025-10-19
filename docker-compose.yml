@@ -3,22 +3,6 @@ version: '3.8'
 services:
   db:
     build: ./database/
-  auth:
-    build: ./auth/
-  book:
-    build: ./book/
-  borrow:
-    build: ./borrow/
-  frontend:
-    build: .
-...
-
-
----
-version: '3.8'
-services:
-  db:
-    build: ./database/
     ports:
       - "3306:3306"
     deploy:
