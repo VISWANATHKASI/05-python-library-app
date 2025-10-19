@@ -12,3 +12,84 @@ services:
   frontend:
     build: .
 ...
+
+
+---
+version: '3.8'
+services:
+  db:
+    build: ./database/
+    ports:
+      - "3306:3306"
+    deploy:
+      replicas: 1
+    networks:
+      - db_network
+      - service
+    volumes:
+      - db_volume:/docker-entrypoint-initdb.d/:ro
+
+  auth:
+    build: ./auth/
+    ports:
+      - "5001:5001"
+    deploy:
+      replicas: 4
+    networks:
+      - service
+      - db_network
+      - frontend
+    volumes:
+      - auth_volume:/app:ro
+       
+  book:
+    build: ./book/
+    ports:
+      - "5002:5002"
+    deploy:
+      replicas: 4
+    networks:
+      - service
+      - db_network
+      - frontend
+    volumes:
+      - book_volume:/app:ro
+
+  borrow:
+    build: ./borrow/
+    ports:
+      - "5003:5003"
+    deploy:
+      replicas: 4
+    networks:
+      - service
+      - db_network
+      - frontend
+    volumes:
+      - borrow_volume:/app:ro
+     
+  frontend:
+    build: .
+    ports:
+      - "5000:5000"
+    deploy:
+      replicas: 4
+    networks:
+      - frontend
+      - service
+    volumes:
+      - frontend_volume:/app:ro      
+volumes:
+  db_volume:
+  auth_volume:
+  book_volume:
+  borrow_volume:
+  frontend_volume:
+networks:
+  db_network:
+    driver: bridge
+  service:
+    driver: bridge
+  frontend:
+    driver: bridge
+...
