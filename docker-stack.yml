@@ -11,15 +11,14 @@ services:
       - db_network
       - service
     volumes:
-      # Store database data persistently in /var/lib/mysql
-      - db_volume:/var/lib/mysql
+      - db_volume:/docker-entrypoint-initdb.d/:ro
 
-  auth_service:
+  auth:
     image: viswanathkasi/dummy:auth
     ports:
       - "5001:5001"
     deploy:
-      replicas: 4
+      replicas: 3
     networks:
       - service
       - db_network
@@ -27,12 +26,12 @@ services:
     volumes:
       - auth_volume:/app:ro
        
-  book_service:
+  book:
     image: viswanathkasi/dummy:book
     ports:
       - "5002:5002"
     deploy:
-      replicas: 4
+      replicas: 3
     networks:
       - service
       - db_network
@@ -40,12 +39,12 @@ services:
     volumes:
       - book_volume:/app:ro
 
-  borrow_service:
+  borrow:
     image: viswanathkasi/dummy:borrow
     ports:
       - "5003:5003"
     deploy:
-      replicas: 4
+      replicas: 3
     networks:
       - service
       - db_network
@@ -58,20 +57,18 @@ services:
     ports:
       - "8081:5000"
     deploy:
-      replicas: 4
+      replicas: 3
     networks:
       - frontend
       - service
     volumes:
       - frontend_volume:/app:ro      
-
 volumes:
   db_volume:
   auth_volume:
   book_volume:
   borrow_volume:
   frontend_volume:
-
 networks:
   db_network:
     driver: overlay
@@ -79,5 +76,4 @@ networks:
     driver: overlay
   frontend:
     driver: overlay
-
 ...
