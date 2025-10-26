@@ -1,4 +1,5 @@
 ---
+---
 version: '3.8'
 services:
   db:
@@ -10,6 +11,9 @@ services:
     networks:
       - db_network
       - service
+    volumes:
+      # Store database data persistently in /var/lib/mysql
+      - db_volume:/var/lib/mysql
 
   auth_service:
     image: viswanathkasi/dummy:auth
@@ -61,12 +65,14 @@ services:
       - service
     volumes:
       - frontend_volume:/app:ro      
+
 volumes:
   db_volume:
   auth_volume:
   book_volume:
   borrow_volume:
   frontend_volume:
+
 networks:
   db_network:
     driver: overlay
@@ -74,4 +80,5 @@ networks:
     driver: overlay
   frontend:
     driver: overlay
+
 ...
