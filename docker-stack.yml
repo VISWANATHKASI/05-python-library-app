@@ -2,7 +2,7 @@
 version: '3.8'
 services:
   db:
-    image: viswanathkasi/docker-stack-project-db:latest
+    image: viswanathkasi/dummy:db
     ports:
       - "3306:3306"
     deploy:
@@ -14,7 +14,7 @@ services:
       - db_volume:/docker-entrypoint-initdb.d/:ro
 
   auth_service:
-    image: viswanathkasi/docker-stack-project-auth:latest
+    image: viswanathkasi/dummy:auth
     ports:
       - "5001:5001"
     deploy:
@@ -27,7 +27,7 @@ services:
       - auth_volume:/app:ro
        
   book_service:
-    image: viswanathkasi/docker-stack-project-book:latest
+    image: viswanathkasi/dummy:book
     ports:
       - "5002:5002"
     deploy:
@@ -40,7 +40,7 @@ services:
       - book_volume:/app:ro
 
   borrow_service:
-    image: viswanathkasi/docker-stack-project-borrow:latest
+    image: viswanathkasi/dummy:borrow
     ports:
       - "5003:5003"
     deploy:
@@ -53,7 +53,7 @@ services:
       - borrow_volume:/app:ro
      
   frontend:
-    image: viswanathkasi/docker-stack-project-frontend:latest
+    image: viswanathkasi/dummy:frontend
     ports:
       - "5000:5000"
     deploy:
