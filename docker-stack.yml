@@ -13,7 +13,7 @@ services:
     volumes:
       - db_volume:/docker-entrypoint-initdb.d/:ro
 
-  auth:
+  auth_service:
     image: viswanathkasi/dummy:auth
     ports:
       - "5001:5001"
@@ -26,7 +26,7 @@ services:
     volumes:
       - auth_volume:/app:ro
        
-  book:
+  book_service:
     image: viswanathkasi/dummy:book
     ports:
       - "5002:5002"
@@ -39,7 +39,7 @@ services:
     volumes:
       - book_volume:/app:ro
 
-  borrow:
+  borrow_service:
     image: viswanathkasi/dummy:borrow
     ports:
       - "5003:5003"
