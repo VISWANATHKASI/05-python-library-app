@@ -11,7 +11,7 @@ services:
       - db_network
       - service
     volumes:
-      - db_volume:/docker-entrypoint-initdb.d/:ro
+      - db_volume:/docker-entrypoint-initdb.d/
 
   auth_service:
     image: viswanathkasi/dummy:auth
