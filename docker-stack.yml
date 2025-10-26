@@ -55,7 +55,7 @@ services:
   frontend:
     image: viswanathkasi/dummy:frontend
     ports:
-      - "5000:5000"
+      - "8081:5000"
     deploy:
       replicas: 4
     networks:
