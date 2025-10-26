@@ -12,6 +12,10 @@ services:
       - service
     volumes:
       - db_volume:/docker-entrypoint-initdb.d/:ro
+    environment:
+      AUTH_SERVICE_URL: http://flm_auth_service:5001
+      BOOK_SERVICE_URL: http://flm_book_service:5002
+      BORROW_SERVICE_URL: http://flm_borrow_service:5003
 
   auth_service:
     image: viswanathkasi/dummy:auth
@@ -25,6 +29,10 @@ services:
       - frontend
     volumes:
       - auth_volume:/app:ro
+    environment:
+      DB_HOST: flm_db:3306
+      BOOK_SERVICE_URL: http://flm_book_service:5002
+      BORROW_SERVICE_URL: http://flm_borrow_service:5003
        
   book_service:
     image: viswanathkasi/dummy:book
@@ -38,6 +46,10 @@ services:
       - frontend
     volumes:
       - book_volume:/app:ro
+    environment:
+      DB_HOST: flm_db:3306
+      AUTH_SERVICE_URL: http://flm_auth_service:5001
+      BORROW_SERVICE_URL: http://flm_borrow_service:5003
 
   borrow_service:
     image: viswanathkasi/dummy:borrow
@@ -51,6 +63,11 @@ services:
       - frontend
     volumes:
       - borrow_volume:/app:ro
+    environment:
+      DB_HOST: flm_db:3306
+      AUTH_SERVICE_URL: http://flm_auth_service:5001
+      BOOK_SERVICE_URL: http://flm_book_service:5002
+    
      
   frontend:
     image: viswanathkasi/dummy:frontend
@@ -62,7 +79,12 @@ services:
       - frontend
       - service
     volumes:
-      - frontend_volume:/app:ro      
+      - frontend_volume:/app:ro
+    environment:
+      AUTH_SERVICE_URL: http://flm_auth_service:5001
+      BOOK_SERVICE_URL: http://flm_book_service:5002
+      BORROW_SERVICE_URL: http://flm_borrow_service:5003
+    
 volumes:
   db_volume:
   auth_volume:
