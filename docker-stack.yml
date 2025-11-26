@@ -71,7 +71,7 @@ services:
   frontend:
     image: viswanathkasi/docker-stack-project-frontend
     ports:
-      - "86:5000"
+      - "85:5000"
     deploy:
       replicas: 3
     networks:
