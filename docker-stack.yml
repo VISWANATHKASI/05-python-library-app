@@ -2,7 +2,6 @@
 version: '3.8'
 services:
   db:
-    name: db
     image: viswanathkasi/docker-stack-project-db
     ports:
       - "3306:3306"
@@ -14,12 +13,12 @@ services:
     volumes:
       - db_volume:/docker-entrypoint-initdb.d/:ro
     environment:
-      AUTH__URL: http://auth_service:5001
-      BOOK_URL: http://book_service:5002
-      BORROW_URL: http://borrow_service:5003
+      DB_HOST: flm_db:3306
+      AUTH__URL: http://flm_auth_service:5001
+      BOOK_URL: http://flm_book_service:5002
+      BORROW_URL: http://flm_borrow_service:5003
 
   auth_service:
-    name: auth_service
     image: viswanathkasi/docker-stack-project-auth
     ports:
       - "5001:5001"
@@ -32,12 +31,12 @@ services:
     volumes:
       - auth_volume:/app:ro
     environment:
-      DB_HOST: db:3306
-      BOOK_URL: http://book_service:5002
-      BORROW_URL: http://borrow_service:5003
+      DB_HOST: flm_db:3306
+      AUTH__URL: http://flm_auth_service:5001
+      BOOK_URL: http://flm_book_service:5002
+      BORROW_URL: http://flm_borrow_service:5003
        
   book_service:
-    name: book_service
     image: viswanathkasi/docker-stack-project-book
     ports:
       - "5002:5002"
@@ -50,12 +49,12 @@ services:
     volumes:
       - book_volume:/app:ro
     environment:
-      DB_HOST: db:3306
-      AUTH_URL: http://auth_service:5001
-      BORROW_URL: http://borrow_service:5003
+      DB_HOST: flm_db:3306
+      AUTH__URL: http://flm_auth_service:5001
+      BOOK_URL: http://flm_book_service:5002
+      BORROW_URL: http://flm_borrow_service:5003
 
   borrow_service:
-    name: borrow_service
     image: viswanathkasi/docker-stack-project-borrow
     ports:
       - "5003:5003"
@@ -67,16 +66,16 @@ services:
       - frontend
     volumes:
       - borrow_volume:/app:ro
-    environment:
-      DB_HOST: db:3306
-      AUTH_URL: http://auth_service:5001
-      BOOK_URL: http://book_service:5002
+     environment:
+      DB_HOST: flm_db:3306
+      AUTH__URL: http://flm_auth_service:5001
+      BOOK_URL: http://flm_book_service:5002
+      BORROW_URL: http://flm_borrow_service:5003
      
   frontend:
-    name: frontend
     image: viswanathkasi/docker-stack-project-frontend
     ports:
-      - "85:5000"
+      - "86:5000"
     deploy:
       replicas: 3
     networks:
@@ -85,9 +84,10 @@ services:
     volumes:
       - frontend_volume:/app:ro
     environment:
-      AUTH_URL: http://auth_service:5001
-      BOOK_URL: http://book_service:5002
-      BORROW_URL: http://borrow_service:5003
+      DB_HOST: flm_db:3306
+      AUTH__URL: http://flm_auth_service:5001
+      BOOK_URL: http://flm_book_service:5002
+      BORROW_URL: http://flm_borrow_service:5003
     
 volumes:
   db_volume:
