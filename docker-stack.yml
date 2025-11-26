@@ -1,4 +1,3 @@
----
 version: '3.8'
 services:
   db:
@@ -35,7 +34,7 @@ services:
       AUTH__URL: http://flm_auth_service:5001
       BOOK_URL: http://flm_book_service:5002
       BORROW_URL: http://flm_borrow_service:5003
-       
+
   book_service:
     image: viswanathkasi/docker-stack-project-book
     ports:
@@ -66,12 +65,12 @@ services:
       - frontend
     volumes:
       - borrow_volume:/app:ro
-     environment:
+    environment:
       DB_HOST: flm_db:3306
       AUTH__URL: http://flm_auth_service:5001
       BOOK_URL: http://flm_book_service:5002
       BORROW_URL: http://flm_borrow_service:5003
-     
+
   frontend:
     image: viswanathkasi/docker-stack-project-frontend
     ports:
@@ -88,13 +87,14 @@ services:
       AUTH__URL: http://flm_auth_service:5001
       BOOK_URL: http://flm_book_service:5002
       BORROW_URL: http://flm_borrow_service:5003
-    
+
 volumes:
   db_volume:
   auth_volume:
   book_volume:
   borrow_volume:
   frontend_volume:
+
 networks:
   db_network:
     driver: overlay
@@ -102,4 +102,3 @@ networks:
     driver: overlay
   frontend:
     driver: overlay
-...
