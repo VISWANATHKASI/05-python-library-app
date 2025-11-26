@@ -13,7 +13,7 @@ services:
       - db_volume:/docker-entrypoint-initdb.d/:ro
     environment:
       DB_HOST: flm_db:3306
-      AUTH__URL: http://flm_auth_service:5001
+      AUTH_URL: http://flm_auth_service:5001
       BOOK_URL: http://flm_book_service:5002
       BORROW_URL: http://flm_borrow_service:5003
 
@@ -31,7 +31,7 @@ services:
       - auth_volume:/app:ro
     environment:
       DB_HOST: flm_db:3306
-      AUTH__URL: http://flm_auth_service:5001
+      AUTH_URL: http://flm_auth_service:5001
       BOOK_URL: http://flm_book_service:5002
       BORROW_URL: http://flm_borrow_service:5003
 
@@ -49,7 +49,7 @@ services:
       - book_volume:/app:ro
     environment:
       DB_HOST: flm_db:3306
-      AUTH__URL: http://flm_auth_service:5001
+      AUTH_URL: http://flm_auth_service:5001
       BOOK_URL: http://flm_book_service:5002
       BORROW_URL: http://flm_borrow_service:5003
 
@@ -67,7 +67,7 @@ services:
       - borrow_volume:/app:ro
     environment:
       DB_HOST: flm_db:3306
-      AUTH__URL: http://flm_auth_service:5001
+      AUTH_URL: http://flm_auth_service:5001
       BOOK_URL: http://flm_book_service:5002
       BORROW_URL: http://flm_borrow_service:5003
 
@@ -84,7 +84,7 @@ services:
       - frontend_volume:/app:ro
     environment:
       DB_HOST: flm_db:3306
-      AUTH__URL: http://flm_auth_service:5001
+      AUTH_URL: http://flm_auth_service:5001
       BOOK_URL: http://flm_book_service:5002
       BORROW_URL: http://flm_borrow_service:5003
 
