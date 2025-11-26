@@ -2,7 +2,7 @@
 version: '3.8'
 services:
   db:
-    image: viswanathkasi/dummy:db
+    image: viswanathkasi/docker-stack-project-db
     ports:
       - "3306:3306"
     deploy:
@@ -18,7 +18,7 @@ services:
       BORROW_URL: http://flm_borrow_service:5003
 
   auth_service:
-    image: viswanathkasi/dummy:auth
+    image: viswanathkasi/docker-stack-project-auth
     ports:
       - "5001:5001"
     deploy:
@@ -35,7 +35,7 @@ services:
       BORROW_URL: http://flm_borrow_service:5003
        
   book_service:
-    image: viswanathkasi/dummy:book
+    image: viswanathkasi/docker-stack-project-book
     ports:
       - "5002:5002"
     deploy:
@@ -52,7 +52,7 @@ services:
       BORROW_URL: http://flm_borrow_service:5003
 
   borrow_service:
-    image: viswanathkasi/dummy:borrow
+    image: viswanathkasi/docker-stack-project-borrow
     ports:
       - "5003:5003"
     deploy:
@@ -69,9 +69,9 @@ services:
       BOOK_URL: http://flm_book_service:5002
      
   frontend:
-    image: viswanathkasi/dummy:frontend
+    image: viswanathkasi/docker-stack-project-frontend
     ports:
-      - "8081:5000"
+      - "86:5000"
     deploy:
       replicas: 3
     networks:
