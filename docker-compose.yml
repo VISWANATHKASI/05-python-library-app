@@ -60,7 +60,7 @@ services:
     container_name: frontend
     build: .
     ports:
-      - "8081:5000"
+      - "86:5000"
     deploy:
       replicas: 1
     networks:
